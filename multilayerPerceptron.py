@@ -66,6 +66,16 @@ class	PReLU:
 	def derivative(z):
 		return 1. * (z > 0) + PReLU.alpha * (z <= 0)
 
+class	ELU:
+	alpha = 0.01
+	@staticmethod
+	def function(z):
+		return z * (z > 0) + (ELU.alpha * (np.exp(z) - 1)) * (z <= 0)
+
+	@staticmethod
+	def derivative(z):
+		return 1. * (z > 0) + (ELU.alpha + ELU.function(z)) * (z <= 0)
+
 
 """ A bunch of loss function"""
 def	rCrossEntropyLoss(a, y, lmbda, weights, l):
